@@ -46,8 +46,7 @@ else:
     im = cv2.imread(image)
     im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     #fd, hog_image = hog(im, orientations, pixels_per_cell, cells_per_block, visualize, normalize)
-    fd, hog_image = hog(im, orientations=9, pixels_per_cell=(8, 8),
-                        cells_per_block=(3, 3), visualise=True)
+    fd, hog_image = hog(im,orientations, pixels_per_cell, cells_per_block, visualise=True)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
 

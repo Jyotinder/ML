@@ -5,6 +5,7 @@ import glob
 import os
 from config import *
 import numpy as np
+from sklearn import linear_model
 
 def sav_SVM(fname,clf_type,training_names):
     fds = []
@@ -35,11 +36,20 @@ def sav_SVM(fname,clf_type,training_names):
             c=np.zeros(max)
             c[:item.shape[0]]=item
             fds[index]=c
+    count1=0
+    if count1 ==0:
+        f = open('./data/config/max.txt', 'w')
+        f.write(str(max))
+        f.close()
+        count1+=1
+
+    classes = np.unique(training_names)
 
     if clf_type is "LIN_SVM":
-        clf = LinearSVC()
+        #clf = LinearSVC()
+        clf =linear_model.SGDClassifier()
         print "Training a Linear SVM Classifier"
-        clf.fit(fds, labels)
+        clf.partial_fit(fds, labels,classes)
         # If feature directories don't exist, create them
         path=model_path
         if not os.path.isdir(path):
